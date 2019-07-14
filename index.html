@@ -11,21 +11,32 @@
     <!-- Linking CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
+
 <body>
     <img id="logo" src="assets/images/logo.png" al t="gamelogo">
     <div id="game-board" class="container">
         <button class="start">Start</button>
         <!--Timer is display here-->
-        <div id="timer"></div>
+        <div class="row align-items-center">
+            <div id="timer" class="col-12 col-lg-12"></div>
+        </div>
         <!--Question is display here-->
-        <div id="question"></div>
+        <div class="row align-items-center">
+            <div id="question" class="col-12 col-lg-12"></div>
+        </div>
         <!--Possible answers here-->
-        <ul class="answer-choices"></ul>
+        <div class="row align-items-center">
+            <ul class="answer-choices" class="col-12 col-lg-12"></ul>
+        </div>
         <!--Player choice-->
-        <div id = "player-choice"></div>
+        <div class="row align-items-center">
+            <div id="player-choice" class="col-12 col-lg-12"></div>
+        </div>
         <!--If player chooses wrong answer, the correct answer will
         be diplayed here-->
-        <div id = "correct-answer"></div>
+        <div class="row align-items-center">
+            <div id="correct-answer" class="col-12 col-lg-12"></div>
+        </div>
         <button class="restart">Restart</button>
     </div>
     <!-- jQuery -->

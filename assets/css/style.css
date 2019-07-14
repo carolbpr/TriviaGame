@@ -16,7 +16,6 @@ body{
 button{
     font-size: 40px;
     background-color: azure;
-    top: 50%;
     position: relative;
     top: 190px;
     padding-left: 30px;
@@ -31,4 +30,8 @@ button{
 }
 .restart{
     display: none;
+    top: 40px;
+}
+.row{
+    height: 40px;
 }
