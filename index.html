@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Trivia Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <!-- Linking CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+    <img id="logo" src="assets/images/logo.png" al t="gamelogo">
+    <div id="game-board" class="container">
+        <button class="start">Start</button>
+        <!--Timer is display here-->
+        <div id="timer"></div>
+        <!--Question is display here-->
+        <div id="question"></div>
+        <!--Possible answers here-->
+        <ul class="answer-choices"></ul>
+        <!--Player choice-->
+        <div id = "player-choice"></div>
+        <!--If player chooses wrong answer, the correct answer will
+        be diplayed here-->
+        <div id = "correct-answer"></div>
+        <button class="restart">Restart</button>
+    </div>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="assets/javascript/app.js"></script>
+
+</body>
