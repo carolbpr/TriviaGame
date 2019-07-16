@@ -11,51 +11,160 @@ var clockRunning = false;
 var time = 0;
 var number = 30;
 function restart() {
-    number = 10;
+    number = 30;
     time = 0;
+    total = 0;
+    rigth = 0;
+    wrong = 0;
+    unanswered = 0;
+    $("#question").empty();
+    $("#answer-choices").empty();
+    $("#timer").empty();
     $("#player-choice").css("display", "none");
     $(".restart").css("display", "none");
     $(".start").css("display", "-webkit-inline-box");
+    wrong = 0;
+    rigth = 0;
+    unanswered = 0;
 }
 const newLocal = "correct";
 function start() {
-    clearInterval(onemore);
-    $("#player-choice").empty();
-    $("#img-answer").css("display", "none");
-    $(".start").css("display", "none");
-    $("#timer").css("display", "block");
-    $("#timer").text("Time Remaining: " + number + " Seconds");
-    choosethequestion()
-    $("#question").css("display", "block");
-    $("#question").html(questionchosen[0]);
-    correctanswer = questionchosen[1].correct;
-    image_answer = images[k];
-    if (!clockRunning) {
-        intervalId = setInterval(count, 1000);
-        clockRunning = true;
+    if (total < 8) {
+        clearInterval(onemore);
+        $("#player-choice").empty();
+        $("#correct-answer").empty();
+        $("#img-answer").css("display", "none");
+        $(".start").css("display", "none");
+        $("#timer").css("display", "block");
+        $("#timer").text("Time Remaining: " + number + " Seconds");
+        choosethequestion()
+        $("#question").css("display", "block");
+        $("#question").html(questionchosen[0]);
+        correctanswer = questionchosen[1].correct;
+        image_answer = images[k];
+        if (!clockRunning) {
+            intervalId = setInterval(count, 1000);
+            clockRunning = true;
+        }
+    }
+    else{
+        clearInterval(onemore);
+        clearInterval(intervalId);
+        clockRunning = false;
+        $("#player-choice").empty();
+        $("#correct-answer").empty();
+        $("#img-answer").css("display", "none");
+        $("#question").html("<h2>All done, here is how you did!</h2>");
+        $("<p>Correct Answers: " + rigth+"</p>").appendTo("#answer-choices");
+        $("<p>Incorrect Answers: " + wrong+"</p>").appendTo("#answer-choices");
+        $("<p>Unanswers: " + unanswered+"</p>").appendTo("#answer-choices");
+        $(".restart").css("display", "-webkit-inline-box");
+        
     }
 }
+
 //this function countdown the clock
 function count() {
     number--;
     $("#timer").html("Time Remaining: " + number + " Seconds");
     //Timeout is the counter is equal 0
     if (number === 0) {
-        $("#player-choice").html("<span>Time Up!</span>");
+        $("#player-choice").html("<span>Out of Time!</span>");
         $("#player-choice").css("display", "inline");
         clearInterval(intervalId);
         clockRunning = false;
         $("#timer").empty();
         $("#question").empty();
+        $("#answer-choices").empty();
+        $("#correct-answer").empty();
+        $(".possible-answer").empty();
+        $("#player-choice").css("display", "inline");
+        $("#img-answer").attr("src", image_answer);
+        $("#img-answer").css("display", "inline");
+        var incorrect = $("<h4>");
+        incorrect.html("The correct Answer was: " + correctanswer);
+        incorrect.appendTo("#correct-answer");
+        onemore = setInterval(counter, 5000);
+        unanswered++;
+        total++;
+
+    }
+}
+function counter() {
+    number = 30;
+    start();
+}
+//function to randomly select the question and possible answers
+function choosethequestion() {
+    k = Math.floor(Math.random() * game.length);
+    questionchosen = game[k];
+    console.log(questionchosen);
+    let possible_answer = questionchosen[1];
+    possible_answer = Object.keys(possible_answer)
+        .map((key) => ({ key, value: possible_answer[key] }))
+        .sort((a, b) => b.key.localeCompare(a.key))
+        .reduce((acc, e) => {
+            acc[e.key] = e.value;
+            var answer = $("<p>");
+            answer.addClass("possible-answer", "posibility", "possible-answer-color");
+            answer.attr("data-posibility", e.value);
+            answer.html(e.value);
+            answer.appendTo("#answer-choices");
+            return acc;
+        }, {});
+
+}
+
+function choice() {
+
+    if (correctanswer == $(this).attr("data-posibility")) {
+        //alert("your answer is correct")
+
+        clockRunning = false;
+        clearInterval(intervalId);
+        $("#question").empty();
         $(".answer-choices").empty();
         $("#correct-answer").empty();
         $(".possible-answer").empty();
-        $("#img-answer").css("display", "none");
-        $(".restart").css("display", "-webkit-inline-box");
+        var correct = $("<h2>");
+        correct.html("Correct!");
+        correct.appendTo("#player-choice");
+        $("#player-choice").css("display", "inline");
+        $("#img-answer").attr("src", image_answer);
+        $("#img-answer").css("display", "inline");
+        onemore = setInterval(counter, 5000);
+        rigth++;
+        total++;
+
+    }
+    else {
+        clockRunning = false;
+        clearInterval(intervalId);
+        $("#question").empty();
+        $(".answer-choices").empty();
+        $("#correct-answer").empty();
+        $(".possible-answer").empty();
+        var correct = $("<h2>");
+        correct.html("Nope!");
+        correct.appendTo("#player-choice");
+        $("#player-choice").css("display", "inline");
+        $("#img-answer").attr("src", image_answer);
+        $("#img-answer").css("display", "inline");
+        var incorrect = $("<h4>");
+        incorrect.html("The correct Answer was: " + correctanswer);
+        incorrect.appendTo("#correct-answer");
+        onemore = setInterval(counter, 5000);
+        wrong++;
+        total++
     }
 }
 //Trivia questions & answers
-var k;
+
+var k; 
+var rigth = 0; 
+var wrong = 0; 
+var unanswered = 0;
+var total = 0;
 var questionchosen;
 var correctanswer = "";
 var image_answer;
@@ -339,50 +448,5 @@ var game = [
         }
     ],
 ];
-//function to randomly select the question and possible answers
-function choosethequestion() {
-    k = Math.floor(Math.random() * game.length);
-    questionchosen = game[k];
-    console.log(questionchosen);
-    let possible_answer = questionchosen[1];
-    possible_answer = Object.keys(possible_answer)
-        .map((key) => ({ key, value: possible_answer[key] }))
-        .sort((a, b) => b.key.localeCompare(a.key))
-        .reduce((acc, e) => {
-            acc[e.key] = e.value;
-            var answer = $("<p>");
-            answer.addClass("possible-answer", "posibility", "possible-answer-color");
-            answer.attr("data-posibility", e.value);
-            answer.html(e.value);
-            answer.appendTo("#answer-choices");
-            return acc;
-        }, {});
 
-}
-
-function choice() {
-
-    if (correctanswer == $(this).attr("data-posibility")) {
-        //alert("your answer is correct")
-        
-        clockRunning = false;
-        clearInterval(intervalId);
-        $("#question").empty();
-        $(".answer-choices").empty();
-        $("#correct-answer").empty();
-        $(".possible-answer").empty();
-        var correct = $("<h2>");
-        correct.html("Correct!");
-        correct.appendTo("#player-choice");
-        $("#img-answer").attr("src", image_answer);
-        $("#img-answer").css("display", "block");
-        onemore= setInterval(function () {
-            number = 30;
-            start();
-        }, 5000);
-        
-    }
-    else { alert("Your answer is wrong") }
-
-}
 
