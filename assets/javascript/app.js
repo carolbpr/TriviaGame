@@ -1,32 +1,10 @@
 window.onload = function () {
     $(".restart").on("click", restart);
     $(".start").on("click", start);
-    //$(".possible-answer").on("click", choice);
+    //".possible-answer" are Dinamically created so need a document function call
     $(document).on('click', ".possible-answer", choice);
 };
-//  Variable that will hold our setInterval that runs the stopwatch
-var intervalId;
-// prevents the clock from being sped up unnecessarily
-var clockRunning = false;
-var time = 0;
-var number = 30;
-function restart() {
-    number = 30;
-    time = 0;
-    total = 0;
-    rigth = 0;
-    wrong = 0;
-    unanswered = 0;
-    $("#question").empty();
-    $("#answer-choices").empty();
-    $("#timer").empty();
-    $("#player-choice").css("display", "none");
-    $(".restart").css("display", "none");
-    $(".start").css("display", "-webkit-inline-box");
-    wrong = 0;
-    rigth = 0;
-    unanswered = 0;
-}
+
 const newLocal = "correct";
 function start() {
     if (total < 8) {
@@ -47,7 +25,7 @@ function start() {
             clockRunning = true;
         }
     }
-    else{
+    else {
         clearInterval(onemore);
         clearInterval(intervalId);
         clockRunning = false;
@@ -55,11 +33,11 @@ function start() {
         $("#correct-answer").empty();
         $("#img-answer").css("display", "none");
         $("#question").html("<h2>All done, here is how you did!</h2>");
-        $("<p>Correct Answers: " + rigth+"</p>").appendTo("#answer-choices");
-        $("<p>Incorrect Answers: " + wrong+"</p>").appendTo("#answer-choices");
-        $("<p>Unanswers: " + unanswered+"</p>").appendTo("#answer-choices");
+        $("<p>Correct Answers: " + rigth + "</p>").appendTo("#answer-choices");
+        $("<p>Incorrect Answers: " + wrong + "</p>").appendTo("#answer-choices");
+        $("<p>Unanswers: " + unanswered + "</p>").appendTo("#answer-choices");
         $(".restart").css("display", "-webkit-inline-box");
-        
+
     }
 }
 
@@ -97,29 +75,34 @@ function counter() {
 //function to randomly select the question and possible answers
 function choosethequestion() {
     k = Math.floor(Math.random() * game.length);
-    questionchosen = game[k];
-    console.log(questionchosen);
-    let possible_answer = questionchosen[1];
-    possible_answer = Object.keys(possible_answer)
-        .map((key) => ({ key, value: possible_answer[key] }))
-        .sort((a, b) => b.key.localeCompare(a.key))
-        .reduce((acc, e) => {
-            acc[e.key] = e.value;
-            var answer = $("<p>");
-            answer.addClass("possible-answer", "posibility", "possible-answer-color");
-            answer.attr("data-posibility", e.value);
-            answer.html(e.value);
-            answer.appendTo("#answer-choices");
-            return acc;
-        }, {});
-
+    checkarray.push(k);
+    //This condition prevent to choose the same question again and again
+    if ($.inArray(checkarray) === -1) {
+        questionchosen = game[k];
+        console.log(questionchosen);
+        let possible_answer = questionchosen[1];
+        possible_answer = Object.keys(possible_answer)
+            .map((key) => ({ key, value: possible_answer[key] }))
+            .sort((a, b) => b.key.localeCompare(a.key))
+            .reduce((acc, e) => {
+                acc[e.key] = e.value;
+                var answer = $("<p>");
+                answer.addClass("possible-answer", "posibility", "possible-answer-color");
+                answer.attr("data-posibility", e.value);
+                answer.html(e.value);
+                answer.appendTo("#answer-choices");
+                return acc;
+            }, );
+    }
+    else{
+        choosethequestion();
+    }
 }
-
+//Function is called after user click on the "".possible-answer"
 function choice() {
-
+    //Correct answer if condition is true
     if (correctanswer == $(this).attr("data-posibility")) {
         //alert("your answer is correct")
-
         clockRunning = false;
         clearInterval(intervalId);
         $("#question").empty();
@@ -135,8 +118,8 @@ function choice() {
         onemore = setInterval(counter, 5000);
         rigth++;
         total++;
-
     }
+    //Wrong answer if condition is false
     else {
         clockRunning = false;
         clearInterval(intervalId);
@@ -158,17 +141,43 @@ function choice() {
         total++
     }
 }
-//Trivia questions & answers
-
-var k; 
-var rigth = 0; 
-var wrong = 0; 
+//This function Restart the game
+function restart() {
+    checkarray = [];
+    number = 30;
+    time = 0;
+    total = 0;
+    rigth = 0;
+    wrong = 0;
+    unanswered = 0;
+    $("#question").empty();
+    $("#answer-choices").empty();
+    $("#timer").empty();
+    $("#player-choice").css("display", "none");
+    $(".restart").css("display", "none");
+    $(".start").css("display", "-webkit-inline-box");
+    wrong = 0;
+    rigth = 0;
+    unanswered = 0;
+}
+//VARIABLES
+//  Variable that will hold our setInterval that runs the stopwatch
+var intervalId;
+// prevents the clock from being sped up unnecessarily
+var clockRunning = false;
+var time = 0;
+var number = 30;
+var checkarray = [];
+var k;
+var rigth = 0;
+var wrong = 0;
 var unanswered = 0;
 var total = 0;
 var questionchosen;
 var correctanswer = "";
 var image_answer;
 var onemore;
+//Trivia images, question and answers
 var images = [
     "assets/images/whale.gif",
     "assets/images/lionpride.jpg",
@@ -188,8 +197,8 @@ var images = [
     "assets/images/komodo.jpg",
     "assets/images/mare.jpg",
     "assets/images/frog.png",
-    "assets/images/ram.webp",
     "assets/images/penguin.webp",
+    "assets/images/ram.webp",
     "assets/images/bison.jpg ",
     "assets/images/mane.jpg",
     "assets/images/bison.webp",
@@ -300,7 +309,7 @@ var game = [
     eleven = [
         question = "Name the world’s fastest land animal.",
         answers = {
-            correct: "Cheeta",
+            correct: "Cheetah",
             incorrect1: "Tiger",
             incorrect2: "Hare",
             incorrect3: "Turtle",

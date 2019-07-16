@@ -28,17 +28,16 @@ button{
 #timer{
     display: none;
     font-size: 30px;
+    margin-bottom: 20px;
 }
 #question{
     display: none;
+    margin-bottom: 20px;
+    padding:0;
 }
 .restart{
     display: none;
     top: 40px;
-}
-.row{
-    height: 40px;
-    margin:20px;
 }
 p{
     font-size: 20px;
@@ -47,5 +46,8 @@ p{
 #img-answer{
     max-width: 250px;
     height: auto;
-    position: absolute;
+    margin: 0px;
+}
+#answer-choices{
+    padding: 0;
 }
