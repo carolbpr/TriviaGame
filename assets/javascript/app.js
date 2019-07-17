@@ -4,9 +4,10 @@ window.onload = function () {
     //".possible-answer" are Dinamically created so need a document function call
     $(document).on('click', ".possible-answer", choice);
 };
-
 const newLocal = "correct";
+//This function runs when the Start button is clicked
 function start() {
+    //It will run for a total of 8 times/questions
     if (total < 8) {
         clearInterval(onemore);
         $("#player-choice").empty();
@@ -26,6 +27,7 @@ function start() {
         }
     }
     else {
+        //Sumary is displayed after 8 questions have been displayed
         clearInterval(onemore);
         clearInterval(intervalId);
         clockRunning = false;
@@ -81,6 +83,8 @@ function choosethequestion() {
         questionchosen = game[k];
         console.log(questionchosen);
         let possible_answer = questionchosen[1];
+        //This function get the values of the object from the array of the question selected
+        //and suffle the possible answers to be displayed
         possible_answer = Object.keys(possible_answer)
             .map((key) => ({ key, value: possible_answer[key] }))
             .sort(() => {return 0.5 - Math.random()})
@@ -95,6 +99,8 @@ function choosethequestion() {
             },{} );
     }
     else{
+        //if the value returned for the condition is different to -1 then 
+        //it will choose a different question
         choosethequestion();
     }
 }
@@ -165,17 +171,23 @@ function restart() {
 var intervalId;
 // prevents the clock from being sped up unnecessarily
 var clockRunning = false;
+//These variables mainly used as counters
 var time = 0;
 var number = 30;
-var checkarray = [];
 var k;
 var rigth = 0;
 var wrong = 0;
 var unanswered = 0;
 var total = 0;
+//These variables hold question and correct answer with its image
 var questionchosen;
 var correctanswer = "";
 var image_answer;
+//Array created with all the questions made during the game to prevent choosing the same
+//question over and over after game array has been shuffled 
+var checkarray = [];
+//This variable is  the second timer to automatically choose another question
+//if answer has been selected (right or wrong) or time runs out
 var onemore;
 //Trivia images, question and answers
 var images = [
