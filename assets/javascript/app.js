@@ -83,7 +83,7 @@ function choosethequestion() {
         let possible_answer = questionchosen[1];
         possible_answer = Object.keys(possible_answer)
             .map((key) => ({ key, value: possible_answer[key] }))
-            .sort((a, b) => b.key.localeCompare(a.key))
+            .sort(() => {return 0.5 - Math.random()})
             .reduce((acc, e) => {
                 acc[e.key] = e.value;
                 var answer = $("<p>");
@@ -92,7 +92,7 @@ function choosethequestion() {
                 answer.html(e.value);
                 answer.appendTo("#answer-choices");
                 return acc;
-            }, );
+            },{} );
     }
     else{
         choosethequestion();
