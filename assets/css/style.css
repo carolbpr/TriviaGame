@@ -6,16 +6,17 @@ body{
 }
 #logo{
     background-color: transparent;
-    width: 25%;
+    width: 30%;
     margin-top:0;
     position: absolute;
 }
 .container{
     background-color: azure;
-    width: 50%;
+    width: 40%;
     text-align: center;
-    height: 550px;
-    margin-top:50px;
+    height: 450px;
+    margin-top:60px;
+    box-shadow: 10px 10px 5px grey;
 }
 button{
     font-size: 40px;
@@ -39,14 +40,28 @@ button{
     display: none;
     top: 40px;
 }
-p{
+.possible-answer{
+    height: auto;
+    position: relative;
     font-size: 20px;
+    top:0;
+    border-radius: 25px;
+    border: 2px solid teal;
+}
+.possible-answer:hover{
+    background-color:#73AD21;
+    font-size: 20px;
+    color: white
+}
+p{
+    font-size: 18px;
     z-index: 10;
 }
+
 #img-answer{
-    max-width: 250px;
-    height: auto;
-    margin: 0px;
+    max-height:200px;
+    max-width: auto;
+    margin-top: 40px;
 }
 #answer-choices{
     padding: 0;

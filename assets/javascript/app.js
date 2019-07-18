@@ -50,7 +50,6 @@ function count() {
     //Timeout is the counter is equal 0
     if (number === 0) {
         $("#player-choice").html("<span>Out of Time!</span>");
-        $("#player-choice").css("display", "inline");
         clearInterval(intervalId);
         clockRunning = false;
         $("#timer").empty();
@@ -58,7 +57,7 @@ function count() {
         $("#answer-choices").empty();
         $("#correct-answer").empty();
         $(".possible-answer").empty();
-        $("#player-choice").css("display", "inline");
+        $("#player-choice").css("display", "block");
         $("#img-answer").attr("src", image_answer);
         $("#img-answer").css("display", "inline");
         var incorrect = $("<h4>");
@@ -77,9 +76,9 @@ function counter() {
 //function to randomly select the question and possible answers
 function choosethequestion() {
     k = Math.floor(Math.random() * game.length);
-    checkarray.push(k);
     //This condition prevent to choose the same question again and again
-    if ($.inArray(checkarray) === -1) {
+    if ($.inArray(k,checkarray) === -1) {
+        checkarray.push(k);
         questionchosen = game[k];
         console.log(questionchosen);
         let possible_answer = questionchosen[1];
@@ -90,10 +89,10 @@ function choosethequestion() {
             .sort(() => {return 0.5 - Math.random()})
             .reduce((acc, e) => {
                 acc[e.key] = e.value;
-                var answer = $("<p>");
+                var answer = $("<p/>");
                 answer.addClass("possible-answer", "posibility", "possible-answer-color");
                 answer.attr("data-posibility", e.value);
-                answer.html(e.value);
+                answer.text(e.value);
                 answer.appendTo("#answer-choices");
                 return acc;
             },{} );
@@ -112,7 +111,7 @@ function choice() {
         clockRunning = false;
         clearInterval(intervalId);
         $("#question").empty();
-        $(".answer-choices").empty();
+        $("#answer-choices").empty();
         $("#correct-answer").empty();
         $(".possible-answer").empty();
         var correct = $("<h2>");
@@ -130,14 +129,15 @@ function choice() {
         clockRunning = false;
         clearInterval(intervalId);
         $("#question").empty();
-        $(".answer-choices").empty();
+        $("#answer-choices").empty();
         $("#correct-answer").empty();
         $(".possible-answer").empty();
         var correct = $("<h2>");
         correct.html("Nope!");
         correct.appendTo("#player-choice");
+        var nope_image = nope[Math.floor(Math.random() * nope.length)]
         $("#player-choice").css("display", "inline");
-        $("#img-answer").attr("src", image_answer);
+        $("#img-answer").attr("src", nope_image);
         $("#img-answer").css("display", "inline");
         var incorrect = $("<h4>");
         incorrect.html("The correct Answer was: " + correctanswer);
@@ -216,6 +216,13 @@ var images = [
     "assets/images/bison.webp",
     "assets/images/drone.jpg",
     "assets/images/queen_cat.jpg",
+];
+var nope = [
+    "assets/images/nope1.webp",
+    "assets/images/nope2.png",
+    "assets/images/nope3.gif",
+    "assets/images/nope4.gif",
+    "assets/images/nope5.jpg"
 ];
 var game = [
     one = [
