@@ -58,7 +58,7 @@ function count() {
         $("#correct-answer").empty();
         $(".possible-answer").empty();
         $("#player-choice").css("display", "block");
-        $("#img-answer").attr("src", image_answer);
+        $("#img-answer").attr("src", "assets/images/out_of _time.webp");
         $("#img-answer").css("display", "inline");
         var incorrect = $("<h4>");
         incorrect.html("The correct Answer was: " + correctanswer);
