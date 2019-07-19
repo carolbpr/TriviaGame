@@ -5,13 +5,15 @@ window.onload = function () {
     $(".start").on("click", start);
     //".possible-answer" are Dinamically created so need a document function call
     $(document).on('click', ".possible-answer", choice);
+    
+
 };
 const newLocal = "correct";
 //This function runs when the Start button is clicked
 function start() {
     //It will run for a total of 8 times/questions
     
-    if (total < 2) {
+    if (total < 8) {
         clearInterval(onemore);
         $("#player-choice").empty();
         $("#correct-answer").empty();
@@ -106,8 +108,7 @@ function choosethequestion() {
                 answer.appendTo("#answer-choices");
                 return acc;
             },{} );
-            
-            $(".possible-answer").hover($("#click").play());
+            $(".possible-answer").mouseenter(function (){$("#click")[0].play()})
                 
     }
     else{
@@ -141,6 +142,7 @@ function choice() {
     }
     //Wrong answer if condition is false
     else {
+        $("audio#click")[2].play();
         clockRunning = false;
         clearInterval(intervalId);
         $("#question").empty();
