@@ -197,7 +197,7 @@ var images = [
     "assets/images/antartica.jpg",
     "assets/images/elephant.webp",
     "assets/images/giraffe.jpg",
-    "assets/images/Camel.jpg",
+    "assets/images/camel.jpg",
     "assets/images/bumblebee.jpg",
     "assets/images/australia.jpg",
     "assets/images/albatross.jpg",
