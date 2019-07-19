@@ -1,4 +1,6 @@
 window.onload = function () {
+    $("#game-board").css("display","none");
+    $("#game-board").slideDown("slow");
     $(".restart").on("click", restart);
     $(".start").on("click", start);
     //".possible-answer" are Dinamically created so need a document function call
@@ -8,7 +10,8 @@ const newLocal = "correct";
 //This function runs when the Start button is clicked
 function start() {
     //It will run for a total of 8 times/questions
-    if (total < 8) {
+    
+    if (total < 2) {
         clearInterval(onemore);
         $("#player-choice").empty();
         $("#correct-answer").empty();
@@ -40,6 +43,8 @@ function start() {
         $("<p>Correct Answers: " + rigth + "</p>").appendTo("#answer-choices");
         $("<p>Incorrect Answers: " + wrong + "</p>").appendTo("#answer-choices");
         $("<p>Unanswers: " + unanswered + "</p>").appendTo("#answer-choices");
+        $("#answer-choices").css("display","none");
+        $("#answer-choices").fadeIn("Slow");
         $(".restart").css("display", "-webkit-inline-box");
 
     }
@@ -78,6 +83,8 @@ function counter() {
 }
 //function to randomly select the question and possible answers
 function choosethequestion() {
+    $("#game-board").css("display","none");
+    $("#game-board").fadeToggle();
     k = Math.floor(Math.random() * game.length);
     //This condition prevent to choose the same question again and again
     if ($.inArray(k,checkarray) === -1) {
@@ -99,6 +106,9 @@ function choosethequestion() {
                 answer.appendTo("#answer-choices");
                 return acc;
             },{} );
+            
+            $(".possible-answer").hover($("#click").play());
+                
     }
     else{
         //if the value returned for the condition is different to -1 then 
@@ -108,6 +118,7 @@ function choosethequestion() {
 }
 //Function is called after user click on the "".possible-answer"
 function choice() {
+
     //Correct answer if condition is true
     if (correctanswer == $(this).attr("data-posibility")) {
         //alert("your answer is correct")
@@ -154,6 +165,8 @@ function choice() {
 }
 //This function Restart the game
 function restart() {
+    $("#game-board").css("display","none");
+    $("#game-board").slideDown("slow");
     checkarray = [];
     number = 30;
     time = 0;
