@@ -57,11 +57,20 @@ p{
     font-size: 18px;
     z-index: 10;
 }
-
-#img-answer{
-    max-height:200px;
+#img-answer0{
+    max-height:auto;
     max-width: auto;
-    margin-top: 40px;
+    margin-top: 10px;
+    display: none;
+    position: absolute;
+    left: 132px;
+}
+#img-answer{
+    max-height:auto;
+    max-width: auto;
+    margin-top: 35px;
+    margin-left:-20px;
+    -webkit-animation: slide 0.5s forwards;
 }
 #answer-choices{
     padding: 0;

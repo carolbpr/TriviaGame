@@ -13,10 +13,11 @@ function start() {
         $("#player-choice").empty();
         $("#correct-answer").empty();
         $("#img-answer").css("display", "none");
+        $("#img-answer0").css("display", "none");
         $(".start").css("display", "none");
         $("#timer").css("display", "block");
         $("#timer").text("Time Remaining: " + number + " Seconds");
-        choosethequestion()
+        choosethequestion();
         $("#question").css("display", "block");
         $("#question").html(questionchosen[0]);
         correctanswer = questionchosen[1].correct;
@@ -34,6 +35,7 @@ function start() {
         $("#player-choice").empty();
         $("#correct-answer").empty();
         $("#img-answer").css("display", "none");
+        $("#img-answer0").css("display", "none");
         $("#question").html("<h2>All done, here is how you did!</h2>");
         $("<p>Correct Answers: " + rigth + "</p>").appendTo("#answer-choices");
         $("<p>Incorrect Answers: " + wrong + "</p>").appendTo("#answer-choices");
@@ -60,6 +62,7 @@ function count() {
         $("#player-choice").css("display", "block");
         $("#img-answer").attr("src", "assets/images/out_of _time.webp");
         $("#img-answer").css("display", "inline");
+        $("#img-answer0").css("display", "inline");
         var incorrect = $("<h4>");
         incorrect.html("The correct Answer was: " + correctanswer);
         incorrect.appendTo("#correct-answer");
@@ -120,6 +123,7 @@ function choice() {
         $("#player-choice").css("display", "inline");
         $("#img-answer").attr("src", image_answer);
         $("#img-answer").css("display", "inline");
+        $("#img-answer0").css("display", "inline");
         onemore = setInterval(counter, 5000);
         rigth++;
         total++;
@@ -139,6 +143,7 @@ function choice() {
         $("#player-choice").css("display", "inline");
         $("#img-answer").attr("src", nope_image);
         $("#img-answer").css("display", "inline");
+        $("#img-answer0").css("display", "inline");
         var incorrect = $("<h4>");
         incorrect.html("The correct Answer was: " + correctanswer);
         incorrect.appendTo("#correct-answer");
@@ -201,7 +206,7 @@ var images = [
     "assets/images/bumblebee.jpg",
     "assets/images/australia.jpg",
     "assets/images/albatross.jpg",
-    "assets/images/cheeta.gif",
+    "assets/images/cheetah.gif",
     "assets/images/calf.jpg",
     "assets/images/panda.webp",
     "assets/images/drake.jpg",
