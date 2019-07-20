@@ -121,6 +121,7 @@ function choosethequestion() {
 function choice() {
     //Correct answer if condition is true
     if (correctanswer == $(this).attr("data-posibility")) {
+        $("#correct")[0].play();
         //alert("your answer is correct")
         clockRunning = false;
         clearInterval(intervalId);
@@ -141,7 +142,7 @@ function choice() {
     }
     //Wrong answer if condition is false
     else {
-        
+        $("#incorrect")[0].play();
         clockRunning = false;
         clearInterval(intervalId);
         $("#question").empty();
