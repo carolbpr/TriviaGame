@@ -85,11 +85,11 @@ function counter() {
 }
 //function to randomly select the question and possible answers
 function choosethequestion() {
-    $("#game-board").css("display","none");
-    $("#game-board").fadeToggle();
     k = Math.floor(Math.random() * game.length);
     //This condition prevent to choose the same question again and again
     if ($.inArray(k,checkarray) === -1) {
+        $("#game-board").css("display","none");
+        $("#game-board").fadeToggle();
         checkarray.push(k);
         questionchosen = game[k];
         console.log(questionchosen);
@@ -108,8 +108,7 @@ function choosethequestion() {
                 answer.appendTo("#answer-choices");
                 return acc;
             },{} );
-            $(".possible-answer").mouseenter(function (){$("#click")[0].play()})
-                
+            $(".possible-answer").mouseenter(function (){$("#click")[0].play()})        
     }
     else{
         //if the value returned for the condition is different to -1 then 
@@ -118,8 +117,8 @@ function choosethequestion() {
     }
 }
 //Function is called after user click on the "".possible-answer"
-function choice() {
 
+function choice() {
     //Correct answer if condition is true
     if (correctanswer == $(this).attr("data-posibility")) {
         //alert("your answer is correct")
@@ -142,7 +141,7 @@ function choice() {
     }
     //Wrong answer if condition is false
     else {
-        $("audio#click")[2].play();
+        
         clockRunning = false;
         clearInterval(intervalId);
         $("#question").empty();
@@ -369,7 +368,7 @@ var game = [
         question = "What is the major food of Giant Panda?",
         answers = {
             correct: "Bamboos",
-            incorrect1: "Noddles",
+            incorrect1: "Noodles",
             incorrect2: "Rice",
             incorrect3: "Grass",
             incorrect4: "Special Panda Food",
